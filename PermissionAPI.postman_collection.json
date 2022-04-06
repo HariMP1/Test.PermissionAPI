@@ -1,0 +1,303 @@
+{
+	"info": {
+		"_postman_id": "3d98eaa5-6d9d-4c2f-92fa-f13397f2c86a",
+		"name": "PermissionAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "V1",
+					"item": [
+						{
+							"name": "Users  Create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"userId\": \"e210236e-da0f-45b9-bcff-2e9b41842b9a\",\r\n  \"username\": \"moneypennytest+superadmin2@gmail.com\",\r\n   \"isActive\": true\r\n}"
+								},
+								"url": {
+									"raw": "{{url}}",
+									"host": [
+										"{{url}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Users   Check the user created",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}?q=moneypennytest%2Bsuperadmin2%40gmail.com",
+									"host": [
+										"{{url}}"
+									],
+									"query": [
+										{
+											"key": "q",
+											"value": "moneypennytest%2Bsuperadmin2%40gmail.com"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "User.{userId}",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}{{userId}}",
+									"host": [
+										"{{url}}{{userId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UserId/Accounts -Bring the accounts back",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}c7860a00-3d55-4f2b-b9cb-77bc019592f9/Accounts",
+									"host": [
+										"{{url}}c7860a00-3d55-4f2b-b9cb-77bc019592f9"
+									],
+									"path": [
+										"Accounts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Edit",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{url1}}{{EditUserId}}",
+									"host": [
+										"{{url1}}{{EditUserId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url1}}{{DeleteUserId}}",
+									"host": [
+										"{{url1}}{{DeleteUserId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Role",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\r\n    1\r\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}{{userId}}/accounts/{{accountNo}}/role",
+									"host": [
+										"{{url}}{{userId}}"
+									],
+									"path": [
+										"accounts",
+										"{{accountNo}}",
+										"role"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Role",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url1}}{{userId}}/accounts/{{accountNo}}/role",
+									"host": [
+										"{{url1}}{{userId}}"
+									],
+									"path": [
+										"accounts",
+										"{{accountNo}}",
+										"role"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Permissions  ONLY Permission Per Account at launch would just be one account",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}{{userId}}/Accounts/{{accountNo}}/Permissions",
+									"host": [
+										"{{url}}{{userId}}"
+									],
+									"path": [
+										"Accounts",
+										"{{accountNo}}",
+										"Permissions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Permissions           Gets all the permissions at both user and role  level for all accounts you have access to",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Response time is less than 200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url1}}{{userId}}/Accounts/Permissions",
+									"host": [
+										"{{url1}}{{userId}}"
+									],
+									"path": [
+										"Accounts",
+										"Permissions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AccountNo/role/roleId",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}9BE8102F-8AD7-4C1C-86AD-9065262F53BE/accounts/56881/role/1",
+									"host": [
+										"{{url}}9BE8102F-8AD7-4C1C-86AD-9065262F53BE"
+									],
+									"path": [
+										"accounts",
+										"56881",
+										"role",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Role/RoleId Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}{{userId}}/accounts/{{accountNo}}/role/{{roleID}}",
+									"host": [
+										"{{url}}{{userId}}"
+									],
+									"path": [
+										"accounts",
+										"{{accountNo}}",
+										"role",
+										"{{roleID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Accounts\\{accountNo}\\Users",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}Accounts/46750/Users",
+									"host": [
+										"{{url}}Accounts"
+									],
+									"path": [
+										"46750",
+										"Users"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
